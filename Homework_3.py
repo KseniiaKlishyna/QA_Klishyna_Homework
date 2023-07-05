@@ -9,7 +9,7 @@ key_word = key_word.lower() # преобразовываем все символ
 key_word = key_word.strip() # убираем пробелы
 notes = []
 
-while key_word:
+while True:
     if key_word == "add": # добавляем нотатку
         new_note = input("Введіть нотатку: ")
         notes.append(new_note)
