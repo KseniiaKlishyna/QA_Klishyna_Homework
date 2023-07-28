@@ -1,0 +1,1 @@
+from .package_2 import square, multiply
