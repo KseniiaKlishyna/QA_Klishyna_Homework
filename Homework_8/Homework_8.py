@@ -41,3 +41,5 @@ age = now.year - birthday.year
 if birthday.month >= now.month and birthday.day > now.day:
     age -= 1
 print(age)
+print(datetime.datetime.timestamp(birthday))
+print(datetime.datetime.timestamp(now))
