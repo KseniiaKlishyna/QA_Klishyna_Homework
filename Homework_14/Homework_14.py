@@ -52,11 +52,11 @@ class CSVOperations:
                 lines.append(row)
 
         try:
-            index = int(index)  # Convert the index to an integer
+            index = int(index)
             if 0 <= index < len(lines):
                 del lines[index]
         except ValueError:
-            pass  # Handle the case where index is not a valid integer
+            pass
 
         with open(self.filename, 'w', newline='') as csv_file:
             csv_writer = csv.writer(csv_file)
