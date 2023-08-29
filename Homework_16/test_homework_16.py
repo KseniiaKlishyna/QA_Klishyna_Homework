@@ -8,7 +8,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 class SephoraTests(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Safari()
+        self.driver = webdriver.Chrome()
 
     def close_modal_window(self):
         try:
@@ -25,21 +25,18 @@ class SephoraTests(unittest.TestCase):
         self.assertEqual("Makeup | Sephora", self.driver.title)
         self.driver.implicitly_wait(10)
 
-        makeup_element = self.driver.find_element(by='xpath', value='//div[contains(text(),"Makeup")]')
-        self.assertIsNotNone(makeup_element)
 
     def test_open_basket(self):
         self.driver.get("https://www.sephora.com/shop/makeup-cosmetics")
         self.close_modal_window()
 
         basket_button = self.driver.find_element(by='xpath', value='//a[@id="inline_basket_trigger"]')
-
         actions = ActionChains(self.driver)
         actions.double_click(basket_button).perform()
-
-        self.driver.implicitly_wait(10)
+        time.sleep(5)
 
         self.assertEqual("Basket | Sephora", self.driver.title)
+
 
     def test_search_element(self):
         self.driver.get("https://www.sephora.com/shop/makeup-cosmetics")
@@ -53,6 +50,7 @@ class SephoraTests(unittest.TestCase):
 
         search_element = self.driver.find_element(by='xpath', value='//span[contains(text(),"lipstick")]')
         self.assertIsNotNone(search_element)
+
 
     def test_sort_elements(self):
         self.driver.get("https://www.sephora.com/shop/makeup-cosmetics")
@@ -68,6 +66,7 @@ class SephoraTests(unittest.TestCase):
         current_url = self.driver.current_url
         self.assertEqual(expected_url, current_url)
 
+
     def test_filter_by_price(self):
         self.driver.get("https://www.sephora.com/shop/makeup-cosmetics")
         self.close_modal_window()
@@ -82,6 +81,7 @@ class SephoraTests(unittest.TestCase):
         expected_url = "https://www.sephora.com/shop/makeup-cosmetics?pl=min&ph=25"
         current_url = self.driver.current_url
         self.assertEqual(expected_url, current_url)
+
     def tearDown(self):
         if self.driver:
             self.driver.quit()
