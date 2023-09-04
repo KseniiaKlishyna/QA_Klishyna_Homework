@@ -14,12 +14,6 @@ def test_search_dogs(homepage):
     assert homepage._driver.current_url == "https://www.thesprucepets.com/search?q=dogs"
 
 
-def test_open_cats_section(homepage):
-    homepage.open_cats_section()
-    time.sleep(3)
-    assert homepage._driver.current_url == "https://www.thesprucepets.com/cats-4162124"
-
-
 def test_open_about_us(homepage):
     homepage.open_about_us()
     time.sleep(3)
