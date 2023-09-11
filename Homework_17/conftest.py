@@ -16,8 +16,3 @@ def driver(request):
 def homepage(driver):
     driver.get("https://www.thesprucepets.com/")
     yield HomePage(driver)
-
-@pytest.fixture
-def categories(driver):
-    driver.get('https://www.thesprucepets.com/cats-4162124')
-    yield CategoryPage(driver)
