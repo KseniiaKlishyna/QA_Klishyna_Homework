@@ -41,7 +41,10 @@ def test_create_object_empty_name():
         "data": {"color": "blue", "generation": "13 Pro Max", "price": 1600}
     }
     response = infra.create_an_object(payload)
+    get_response = infra.get_an_object(payload)
     assert response.status_code == 200
+    assert response.json()['name'] == None
+    print(get_response.json())
 
 
 def test_create_object_empty_data():
@@ -49,8 +52,10 @@ def test_create_object_empty_data():
         "name": "Apple IPhone",
         "data": {}
     }
+    get_response = infra.get_an_object(payload)
     response = infra.create_an_object(payload)
     assert response.status_code == 200
+    print(get_response.json())
 
 
 def test_create_object_large_payload():
@@ -81,7 +86,7 @@ def test_update_object_with_large_payload():
     }
     changed_obj = infra.update_an_object(obj_id, large_payload)
     assert response.status_code == 200
-    assert changed_obj.status_code == 500
+    assert changed_obj.status_code == 413
 
 def test_update_object_with_invalid_id():
     invalid_id = "invalid_id"
@@ -96,7 +101,7 @@ def test_update_object_with_invalid_id():
         "error": f"The Object with id = {invalid_id} doesn't exist. Please provide an object id which exists or generate a new Object using POST request and capture the id of it to use it as part of PUT request after that."
     }
     changed_obj = infra.update_an_object(invalid_id, invalid_payload)
-    assert changed_obj.status_code == 405
+    assert changed_obj.status_code == 404
     assert changed_obj.json() == expected_error
 
 
@@ -107,6 +112,7 @@ def test_update_object_with_valid_payload():
     assert changed_obj.status_code == 200
     assert changed_obj.json()['name'] == "New Name"
     assert changed_obj.json()['data']['color'] == "black"
+    print(changed_obj.json())
 
 
 def test_delete_object():
@@ -141,3 +147,4 @@ def test_delete_object_with_valid_id():
     expected_message = {"message": f"Object with id = {obj_id} has been deleted."}
     assert deleted_obj.status_code == 200
     assert deleted_obj.json() == expected_message
+    print(expected_message)
