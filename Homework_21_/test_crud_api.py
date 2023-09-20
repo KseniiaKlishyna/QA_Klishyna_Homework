@@ -1,4 +1,4 @@
-import Homework_21.infrastructure as infra
+import Homework_21_.infrastructure as infra
 
 
 def test_get_object():
@@ -45,6 +45,8 @@ def test_create_object_empty_name():
     assert response.status_code == 200
     assert response.json()['name'] == None
     print(get_response.json())
+    assert response.status_code == 200
+
 
 
 def test_create_object_empty_data():
@@ -56,6 +58,9 @@ def test_create_object_empty_data():
     response = infra.create_an_object(payload)
     assert response.status_code == 200
     print(get_response.json())
+    response = infra.create_an_object(payload)
+    assert response.status_code == 200
+
 
 
 def test_create_object_large_payload():
@@ -148,3 +153,4 @@ def test_delete_object_with_valid_id():
     assert deleted_obj.status_code == 200
     assert deleted_obj.json() == expected_message
     print(expected_message)
+    print(deleted_obj.json())
