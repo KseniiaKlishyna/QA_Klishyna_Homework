@@ -153,4 +153,4 @@ def test_delete_object_with_valid_id():
     assert deleted_obj.status_code == 200
     assert deleted_obj.json() == expected_message
     print(expected_message)
-    print(deleted_obj.json())
+    print(deleted_obj.json)
